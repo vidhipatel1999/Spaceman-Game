@@ -1,1 +1,13 @@
-console.log("Js is Loaded");
+/*----- constants -----*/
+
+
+/*----- state variables -----*/
+
+
+/*----- cached elements  -----*/
+
+
+/*----- event listeners -----*/
+
+
+/*----- functions -----*/
