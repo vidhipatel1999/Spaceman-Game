@@ -7,7 +7,7 @@
 /*----- cached elements  -----*/
 
 
-/*----- event listeners -----*/
+/*----- event listeners -----*
 
 
 /*----- functions -----*/
