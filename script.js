@@ -12,7 +12,8 @@ const hintOptions = [
     "Snowman from Frozen",
     "A Young Deer",
     "Lost her glass slipper" 
-]
+];
+/*Make this an object instead?*/ 
 
 const incorrectAllowed = 6;
 /*or can declare in init?*/
@@ -61,6 +62,22 @@ function render() {
     renderButton();
     renderButtonStyle();
 }
+
+function renderMessage() {
+    if (gameStatus === "Winner") {
+        messagePanel.innerText = "You Won! Great Job!";
+    } else if (gameStatus === "Loser") {
+        messagePanel.innerHTML = `Oh no! You lost. The word was ${solutionWord.join("")}`;
+    } else {
+        messagePanel.innerText = `${incorrectAllowed - incorrectGuesses.length} Guesses Remaining!`
+    }
+}
+/*can add span style of bold*/
+
+
+
+
+
 
 
 
