@@ -1,6 +1,10 @@
 /*----- constants -----*/
 const wordOptions = ["Ariel", "Belle", "Goofy", "Nemo", "Woody", "Simba", "Russell", "Olaf", "Bambi", "Cinderella"];
 
+const hintOptions= [
+    
+]
+
 /*----- state variables -----*/
 let solutionWord;
 let incorrectGuesses;
@@ -17,6 +21,8 @@ let hint;
 
 
 /*----- functions -----*/
+init();
+
 function init() {
     gameStatus = null;
     incorrectAmount = 0;
@@ -27,6 +33,8 @@ function init() {
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(''));
     hint = hintOptions[solutionIndex]; 
+    render();
+    /*hint box line and the incorrectAmount declared under state...*/
 }
   
 
