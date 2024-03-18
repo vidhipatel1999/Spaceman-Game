@@ -9,7 +9,7 @@ const hintOptions= [
 let solutionWord;
 let incorrectGuesses;
 let incorrectAmount;
-let wordStatus = [];
+let wordStatus;
 let gameStatus;
 let hint;
 
@@ -27,6 +27,7 @@ function init() {
     gameStatus = null;
     incorrectAmount = 0;
     incorrectGuesses = [];
+    wordStatus = [];
     solutionWord = wordOptions[Math.floor(Math.random() * wordOptions.length)].split("");
     for (let i=0; i < solutionWord.length; i++){
         wordStatus.push("_");
@@ -36,7 +37,14 @@ function init() {
     render();
     /*hint box line and the incorrectAmount declared under state...*/
 }
-  
+
+function render() {
+    renderMessage();
+    renderButton();
+    renderButtonStyle();
+}
+
+
 
 
 
