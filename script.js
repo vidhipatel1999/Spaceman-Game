@@ -1,8 +1,17 @@
 /*----- constants -----*/
 const wordOptions = ["Ariel", "Belle", "Goofy", "Nemo", "Woody", "Simba", "Russell", "Olaf", "Bambi", "Cinderella"];
 
-const hintOptions = [
-     
+const hintOptions = [ 
+    "Mermaid princess",
+    "Wears yellow ballgown",
+    "Friend of Mickey Mouse",
+    "Lost clownfish",
+    "Cowboy doll from Toy Story",
+    "Character in Lion King",
+    "Wilderness Explorer from Up",
+    "Snowman from Frozen",
+    "A Young Deer",
+    "Lost her glass slipper" 
 ]
 
 const incorrectAllowed = 6;
@@ -53,16 +62,6 @@ function render() {
     renderButtonStyle();
 }
 
-function renderMessage() {
-    if (gameStatus === "Winner") {
-        messagePanel.innerText = "You Won! Great Job!";
-    } else if (gamestatus === "Loser") {
-        messagePanel.innerHTML = `Oh no! You lost. The word was ${solutionWord.join("")}`;
-    } else {
-        messageEl.innerText = `${incorrectAllowed - incorrectGuesses.length} Guesses Remaining!`
-    }
-}
-/*can add span style of bold*/
 
 
 
