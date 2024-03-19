@@ -18,6 +18,7 @@ const hintOptions = [
 const incorrectAllowed = 6;
 // declare in init instead?
 
+
 /*----- state variables -----*/
 let solutionWord;
 let incorrectGuesses;
@@ -58,7 +59,7 @@ function init() {
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(""));
     hint = hintOptions[solutionIndex]; 
-    resetButtonDisplay
+    resetButtonDisplay();
     render();
     /* Have hint box line and the incorrectAmount declared under state instead?...*/
 }
@@ -92,6 +93,7 @@ function render() {
     renderMessage();
     renderWordStatus();
     renderButtonDisplay();
+    renderSpaceman();
 }
 
 function renderWordStatus(){
@@ -114,6 +116,7 @@ function resetButtonDisplay() {
         button.style.color = "";
     });
 }
+
 function renderButtonDisplay() {
     letterButtons.forEach(button => {
         const letter = button.textContent;
@@ -125,6 +128,10 @@ function renderButtonDisplay() {
 }
 
 /*can add span style of bold*/
+
+function renderSpaceman(){
+spacemanImage.src = `imgs/spaceman-${incorrectGuesses.length}.jpg`;
+}
 
 render();
 
