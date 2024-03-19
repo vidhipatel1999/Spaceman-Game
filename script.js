@@ -22,7 +22,7 @@ const incorrectAllowed = 6;
 let solutionWord;
 let incorrectGuesses;
 let incorrectAmount;
-let wordStatus = [];
+let wordStatus;
 let gameStatus;
 let hint;
 
@@ -38,8 +38,10 @@ const resetButton = document.getElementById("play-again");
 
 /*----- event listeners -----*/
 letterButtons.forEach(button => button.addEventListener("click", handleLetters));
-/*Include Event listeners for hint, and play again button
 resetButton.addEventListener("click", init);
+
+/*Include Event listeners for hint, and play again button
+
 hintButton.addEventListener("click", handleHint);*/
 
 /*----- functions -----*/
@@ -50,6 +52,7 @@ function init() {
     incorrectAmount = 0;
     incorrectGuesses = [];
     solutionWord = wordOptions[Math.floor(Math.random() * wordOptions.length)].split("");
+    wordStatus = []
     for (let i=0; i < solutionWord.length; i++){
         wordStatus.push("_");
     }
@@ -94,7 +97,6 @@ function checkWin() {
 function render() {
     renderMessage();
     renderWordStatus();
-    // resetButton();
 }
 
 function renderWordStatus(){
@@ -111,6 +113,8 @@ function renderMessage() {
     }
 }
 /*can add span style of bold*/
+
+    
 
 
 
