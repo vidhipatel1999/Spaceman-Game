@@ -1,5 +1,5 @@
 /*----- constants -----*/
-const wordOptions = ["Ariel", "Belle", "Goofy", "Nemo", "Woody", "Simba", "Russell", "Olaf", "Bambi", "Cinderella"];
+const wordOptions = ["ARIEL", "BELLE", "GOOFY", "NEMO", "WOODY", "SIMBA", "RUSSELL", "OLAF", "BAMBI", "CINDERELLA"];
 
 const hintOptions = [ 
     "Mermaid princess",
@@ -13,16 +13,16 @@ const hintOptions = [
     "A Young Deer",
     "Lost her glass slipper" 
 ];
-/*Make this an object instead?*/ 
+// Make this an object instead? 
 
 const incorrectAllowed = 6;
-/*or can declare in init?*/
+// declare in init instead?
 
 /*----- state variables -----*/
 let solutionWord;
 let incorrectGuesses;
 let incorrectAmount;
-let wordStatus;
+let wordStatus = [];
 let gameStatus;
 let hint;
 
@@ -36,8 +36,11 @@ const hintButton = document.getElementById('hint');
 const hintMessage = document.querySelector("p");
 const resetButton = document.getElementById("play-again");
 
-/*----- event listeners -----*
-
+/*----- event listeners -----*/
+letterButtons.forEach(button => button.addEventListener("click", handleLetters));
+/*Include Event listeners for hint, and play again button
+resetButton.addEventListener("click", init);
+hintButton.addEventListener("click", handleHint);*/
 
 /*----- functions -----*/
 init();
@@ -46,21 +49,56 @@ function init() {
     gameStatus = null;
     incorrectAmount = 0;
     incorrectGuesses = [];
-    wordStatus = [];
     solutionWord = wordOptions[Math.floor(Math.random() * wordOptions.length)].split("");
     for (let i=0; i < solutionWord.length; i++){
         wordStatus.push("_");
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(""));
     hint = hintOptions[solutionIndex]; 
+    letterButtons.forEach(button => {
+        button.disabled = false;
+        button.style.color = "";
+    });
     render();
-    /*hint box line and the incorrectAmount declared under state...*/
+    /* Have hint box line and the incorrectAmount declared under state instead?...*/
+}
+
+
+function handleLetters(event) {
+    if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus || event.target.tagName !== "BUTTON") {
+        return;
+    }
+    const letterButton = event.target;
+    const letter = letterButton.textContent;
+    letterButton.disabled = true;
+    letterButton.style.color = "black";
+    if(solutionWord.includes(letter)) {
+        solutionWord.forEach((char, idx) => {
+            if (char === letter) {
+                wordStatus[idx] = letter;
+            }
+        });
+    } else {
+        incorrectGuesses.push(letter);
+    }
+    gameStatus = checkWin();
+    render();
+}
+
+function checkWin() {
+    return wordStatus.includes("_") ?
+        (incorrectGuesses.length > incorrectAllowed - 1 ? "Loser" : null) :
+        "Winner";
 }
 
 function render() {
     renderMessage();
-    renderButton();
-    renderButtonStyle();
+    renderWordStatus();
+    // resetButton();
+}
+
+function renderWordStatus(){
+    wordGuessed.innerText = wordStatus.join("");
 }
 
 function renderMessage() {
@@ -69,10 +107,15 @@ function renderMessage() {
     } else if (gameStatus === "Loser") {
         messagePanel.innerHTML = `Oh no! You lost. The word was ${solutionWord.join("")}`;
     } else {
-        messagePanel.innerText = `${incorrectAllowed - incorrectGuesses.length} Guesses Remaining!`
+        messagePanel.innerText = `${incorrectAllowed - incorrectGuesses.length} Guesses Remaining!`;
     }
 }
 /*can add span style of bold*/
+
+
+
+
+
 
 
 
