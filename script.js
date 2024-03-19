@@ -58,10 +58,7 @@ function init() {
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(""));
     hint = hintOptions[solutionIndex]; 
-    letterButtons.forEach(button => {
-        button.disabled = false;
-        button.style.color = "";
-    });
+    resetButtonDisplay
     render();
     /* Have hint box line and the incorrectAmount declared under state instead?...*/
 }
@@ -71,10 +68,7 @@ function handleLetters(event) {
     if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus || event.target.tagName !== "BUTTON") {
         return;
     }
-    const letterButton = event.target;
-    const letter = letterButton.textContent;
-    letterButton.disabled = true;
-    letterButton.style.color = "black";
+    const letter = event.target.textContent;
     if(solutionWord.includes(letter)) {
         solutionWord.forEach((char, idx) => {
             if (char === letter) {
@@ -97,6 +91,7 @@ function checkWin() {
 function render() {
     renderMessage();
     renderWordStatus();
+    renderButtonDisplay();
 }
 
 function renderWordStatus(){
@@ -112,10 +107,26 @@ function renderMessage() {
         messagePanel.innerText = `${incorrectAllowed - incorrectGuesses.length} Guesses Remaining!`;
     }
 }
+
+function resetButtonDisplay() {
+    letterButtons.forEach(button => {
+        button.disabled = false;
+        button.style.color = "";
+    });
+}
+function renderButtonDisplay() {
+    letterButtons.forEach(button => {
+        const letter = button.textContent;
+        if (wordStatus.includes(letter) || incorrectGuesses.includes(letter)) {
+            button.disabled = true;
+            button.style.color = "black";
+        }
+    });
+}
+
 /*can add span style of bold*/
 
-    
-
+render();
 
 
 
