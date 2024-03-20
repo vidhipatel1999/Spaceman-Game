@@ -33,17 +33,14 @@ const messagePanel = document.getElementById("message");
 const spacemanImage = document.querySelector("img");
 const wordGuessed = document.getElementById('word-reveal');
 const letterButtons = [...document.querySelectorAll("#letters > button")];
-const hintButton = document.getElementById('hint');
+const hintButton = document.getElementById("hint");
 const hintMessage = document.querySelector("p");
 const resetButton = document.getElementById("play-again");
 
 /*----- event listeners -----*/
 letterButtons.forEach(button => button.addEventListener("click", handleLetters));
 resetButton.addEventListener("click", init);
-
-/*Include Event listeners for hint, and play again button
-
-hintButton.addEventListener("click", handleHint);*/
+hintButton.addEventListener("click", revealHint);
 
 /*----- functions -----*/
 init();
@@ -59,6 +56,7 @@ function init() {
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(""));
     hint = hintOptions[solutionIndex]; 
+    hintMessage.style.visibility = "hidden";
     resetButtonDisplay();
     render();
     /* Have hint box line and the incorrectAmount declared under state instead?...*/
@@ -66,17 +64,18 @@ function init() {
 
 
 function handleLetters(event) {
-    if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus || event.target.tagName !== "BUTTON") {
+    if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus|| event.target.tagName !== "BUTTON") {
         return;
     }
     const letter = event.target.textContent;
-    if(solutionWord.includes(letter)) {
-        solutionWord.forEach((char, idx) => {
-            if (char === letter) {
-                wordStatus[idx] = letter;
-            }
-        });
-    } else {
+    let foundLetter = false;
+    for (let i = 0; i < solutionWord.length; i++) {
+    if (solutionWord[i] === letter) {
+        wordStatus[i] = letter;
+        foundLetter = true;
+        }
+    }
+    if (!foundLetter) {
         incorrectGuesses.push(letter);
     }
     gameStatus = checkWin();
@@ -89,10 +88,15 @@ function checkWin() {
         "Winner";
 }
 
+function revealHint() { 
+    hintMessage.style.visibility = "visible";
+    hintMessage.innerHTML = hint;
+}
+
 function render() {
     renderMessage();
     renderWordStatus();
-    renderButtonDisplay();
+    renderLettersDisplay();
     renderSpaceman();
 }
 
@@ -117,7 +121,7 @@ function resetButtonDisplay() {
     });
 }
 
-function renderButtonDisplay() {
+function renderLettersDisplay() {
     letterButtons.forEach(button => {
         const letter = button.textContent;
         if (wordStatus.includes(letter) || incorrectGuesses.includes(letter)) {
@@ -134,13 +138,6 @@ spacemanImage.src = `imgs/spaceman-${incorrectGuesses.length}.jpg`;
 }
 
 render();
-
-
-
-
-
-
-
 
 
 
