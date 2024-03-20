@@ -4,6 +4,7 @@
 
 
 body {
+    background-color: black;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -26,7 +27,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     font-size: 60px;
-    color: black;
+    color: white;
     font-family: "Codystar", sans-serif;
 }
 
@@ -36,7 +37,7 @@ h2 {
     justify-content: flex-start;
     align-items: center;
     font-size: 30px;
-    color: lightslategray;
+    color: white;
     font-family: "Rubik Scribble", system-ui;
 }
 
@@ -46,7 +47,7 @@ h2 {
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    color: black;
+    color: white;
 }
 
 #hint {
@@ -56,7 +57,7 @@ h2 {
     width: 15vmin;
     margin: 15px auto;
     background-color: pink;
-    color: darkblue;
+    color: black;
     border: 5px solid black;
     font-size: 2vmin;
 }
@@ -64,7 +65,7 @@ h2 {
 #word-reveal {
     height: 60px;
     letter-spacing: 3px;
-    color: black;
+    color: white;
     font-size: 50px;
     display: flex;
     justify-content: center;
@@ -86,8 +87,8 @@ h2 {
     font-weight: bold;
     height: 5vmin;
     width: 5vmin;
-    color: pink;
-    background-color: black;
+    color: palevioletred;
+    background-color: lightskyblue;
     border: 2px solid white;
     font-size: 2vmin;
 }
@@ -115,4 +116,5 @@ p{
     justify-content: center;
     align-items: center;
     margin: auto;
+    color: white;
 }
