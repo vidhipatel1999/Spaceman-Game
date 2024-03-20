@@ -105,8 +105,8 @@ h2 {
 
 #spaceman{
     display: flex;
-    height: 20ch;
-    width: 15vh;
+    height: 30vh;
+    width: 20vh;
     justify-content: center;
     margin: 0px auto;
 }

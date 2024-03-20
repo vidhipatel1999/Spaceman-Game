@@ -13,10 +13,8 @@ const hintOptions = [
     "A Young Deer",
     "Lost her glass slipper" 
 ];
-// Make this an object instead? 
 
 const incorrectAllowed = 6;
-// declare in init instead?
 
 
 /*----- state variables -----*/
@@ -49,6 +47,14 @@ function init() {
     gameStatus = null;
     incorrectAmount = 0;
     incorrectGuesses = [];
+    hintMessage.style.visibility = "hidden";
+    generateRandomWord();
+    resetButtonDisplay();
+    render();
+    /* Have hint box line and the incorrectAmount declared under state instead?...*/
+}
+
+function generateRandomWord(){
     solutionWord = wordOptions[Math.floor(Math.random() * wordOptions.length)].split("");
     wordStatus = []
     for (let i=0; i < solutionWord.length; i++){
@@ -56,12 +62,7 @@ function init() {
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(""));
     hint = hintOptions[solutionIndex]; 
-    hintMessage.style.visibility = "hidden";
-    resetButtonDisplay();
-    render();
-    /* Have hint box line and the incorrectAmount declared under state instead?...*/
 }
-
 
 function handleLetters(event) {
     if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus|| event.target.tagName !== "BUTTON") {
@@ -131,10 +132,8 @@ function renderLettersDisplay() {
     });
 }
 
-/*can add span style of bold*/
-
 function renderSpaceman(){
-spacemanImage.src = `imgs/spaceman-${incorrectGuesses.length}.jpg`;
+spacemanImage.src = `imgs/mickey-${incorrectGuesses.length}.jpg`;
 }
 
 render();
