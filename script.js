@@ -16,14 +16,13 @@ const hintOptions = [
 
 const incorrectAllowed = 6;
 
-
 /*----- state variables -----*/
 let solutionWord;
 let incorrectGuesses;
+let incorrectAmount;
 let wordStatus;
 let gameStatus;
 let hint;
-
 
 /*----- cached elements  -----*/
 const messagePanel = document.getElementById("message");
@@ -44,11 +43,11 @@ init();
 
 function init() {
     gameStatus = null;
-    incorrectAmount = 0;
     incorrectGuesses = [];
     hintMessage.style.visibility = "hidden";
     generateRandomWord();
     resetButtonDisplay();
+    calculateIncorrectAmount();
     render();
 }
 
@@ -83,14 +82,19 @@ function handleLetters(event) {
     }
     if (!foundLetter) {
         incorrectGuesses.push(letter);
+        calculateIncorrectAmount();
     }
     gameStatus = checkWin();
     render();
 }
 
+function calculateIncorrectAmount() {
+    incorrectAmount = incorrectGuesses.length;
+}
+
 function checkWin() {
     return wordStatus.includes("_") ?
-        (incorrectGuesses.length > incorrectAllowed - 1 ? "Loser" : null) :
+        (incorrectAmount >= incorrectAllowed ? "Loser" : null) :
         "Winner";
 }
 
@@ -112,9 +116,9 @@ function renderWordStatus() {
 
 function renderMessage() {
     if (gameStatus === "Winner") {
-        messagePanel.innerText = "You Won! Great Job!";
+        messagePanel.innerHTML = "<span style='font-weight:bold'>You Won! Great Job!</span>";
     } else if (gameStatus === "Loser") {
-        messagePanel.innerHTML = `Oh no! You lost. The word was ${solutionWord.join("")}`;
+        messagePanel.innerHTML = `<span style='font-weight:bold'>Oh no! You lost. The word was ${solutionWord.join("")}</span>`;
     } else {
         messagePanel.innerText = `${incorrectAllowed - incorrectGuesses.length} Guesses Remaining!`;
     }

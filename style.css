@@ -1,10 +1,8 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-
 body {
-    
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -71,7 +69,6 @@ h2 {
     height: 5vh;
     letter-spacing: 0.5vmin;
     font-size: 4.7vmin;
-    
 }
 
 #letters {
@@ -79,13 +76,13 @@ h2 {
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    height: 15vh; 
+    height: 15vh;
     max-width: 90vh;
     margin: 0.5vmin auto;
     border: 0.2vmin black;
 }
 
-#letters > button {
+#letters>button {
     font-weight: bold;
     height: 5vmin;
     width: 5vmin;
@@ -95,7 +92,7 @@ h2 {
     font-size: 2vmin;
 }
 
-#play-again{
+#play-again {
     background-color: lightgoldenrodyellow;
     color: rgb(21, 7, 7);
     padding: 1vmin;
@@ -105,7 +102,7 @@ h2 {
     border: 0.2vmin black;
 }
 
-#spaceman{
+#spaceman {
     display: flex;
     height: 30vh;
     width: 20vh;
@@ -113,7 +110,7 @@ h2 {
     margin: 0vmin auto;
 }
 
-p{
+p {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,7 +118,7 @@ p{
     color: white;
 }
 
-#letters > button:hover {
+#letters>button:hover {
     background-color: lavender;
 }
 
