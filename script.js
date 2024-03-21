@@ -1,7 +1,7 @@
 /*----- constants -----*/
 const wordOptions = ["ARIEL", "BELLE", "GOOFY", "NEMO", "WOODY", "SIMBA", "RUSSELL", "OLAF", "BAMBI", "CINDERELLA"];
 
-const hintOptions = [ 
+const hintOptions = [
     "Mermaid princess",
     "Wears yellow ballgown",
     "Friend of Mickey Mouse",
@@ -11,7 +11,7 @@ const hintOptions = [
     "Wilderness Explorer from Up",
     "Snowman from Frozen",
     "A Young Deer",
-    "Lost her glass slipper" 
+    "Lost her glass slipper"
 ];
 
 const incorrectAllowed = 6;
@@ -52,14 +52,14 @@ function init() {
     render();
 }
 
-function generateRandomWord(){
+function generateRandomWord() {
     solutionWord = wordOptions[Math.floor(Math.random() * wordOptions.length)].split("");
     wordStatus = []
-    for (let i=0; i < solutionWord.length; i++){
+    for (let i = 0; i < solutionWord.length; i++) {
         wordStatus.push("_");
     }
     const solutionIndex = wordOptions.findIndex(word => word === solutionWord.join(""));
-    hint = hintOptions[solutionIndex]; 
+    hint = hintOptions[solutionIndex];
 }
 
 function resetButtonDisplay() {
@@ -76,9 +76,9 @@ function handleLetters(event) {
     const letter = event.target.textContent;
     let foundLetter = false;
     for (let i = 0; i < solutionWord.length; i++) {
-    if (solutionWord[i] === letter) {
-        wordStatus[i] = letter;
-        foundLetter = true;
+        if (solutionWord[i] === letter) {
+            wordStatus[i] = letter;
+            foundLetter = true;
         }
     }
     if (!foundLetter) {
@@ -94,7 +94,7 @@ function checkWin() {
         "Winner";
 }
 
-function revealHint() { 
+function revealHint() {
     hintMessage.style.visibility = "visible";
     hintMessage.innerHTML = hint;
 }
@@ -106,7 +106,7 @@ function render() {
     renderSpaceman();
 }
 
-function renderWordStatus(){
+function renderWordStatus() {
     wordGuessed.innerText = wordStatus.join("");
 }
 
@@ -130,8 +130,8 @@ function renderLettersDisplay() {
     });
 }
 
-function renderSpaceman(){
-spacemanImage.src = `./imgs/mickey-${incorrectGuesses.length}.jpg`;
+function renderSpaceman() {
+    spacemanImage.src = `./imgs/mickey-${incorrectGuesses.length}.jpg`;
 }
 
 
