@@ -20,7 +20,6 @@ const incorrectAllowed = 6;
 /*----- state variables -----*/
 let solutionWord;
 let incorrectGuesses;
-let incorrectAmount;
 let wordStatus;
 let gameStatus;
 let hint;
@@ -51,7 +50,6 @@ function init() {
     generateRandomWord();
     resetButtonDisplay();
     render();
-    /* Have hint box line and the incorrectAmount declared under state instead?...*/
 }
 
 function generateRandomWord(){
@@ -64,8 +62,15 @@ function generateRandomWord(){
     hint = hintOptions[solutionIndex]; 
 }
 
+function resetButtonDisplay() {
+    letterButtons.forEach(button => {
+        button.disabled = false;
+        button.style.color = "";
+    });
+}
+
 function handleLetters(event) {
-    if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus|| event.target.tagName !== "BUTTON") {
+    if (gameStatus === "Winner" || gameStatus === "Loser" || gameStatus) {
         return;
     }
     const letter = event.target.textContent;
@@ -95,8 +100,8 @@ function revealHint() {
 }
 
 function render() {
-    renderMessage();
     renderWordStatus();
+    renderMessage();
     renderLettersDisplay();
     renderSpaceman();
 }
@@ -115,13 +120,6 @@ function renderMessage() {
     }
 }
 
-function resetButtonDisplay() {
-    letterButtons.forEach(button => {
-        button.disabled = false;
-        button.style.color = "";
-    });
-}
-
 function renderLettersDisplay() {
     letterButtons.forEach(button => {
         const letter = button.textContent;
@@ -133,10 +131,9 @@ function renderLettersDisplay() {
 }
 
 function renderSpaceman(){
-spacemanImage.src = `imgs/mickey-${incorrectGuesses.length}.jpg`;
+spacemanImage.src = `./imgs/mickey-${incorrectGuesses.length}.jpg`;
 }
 
-render();
 
 
 
